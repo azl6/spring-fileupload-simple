@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+  namespace: alex
+spec:
+  volumeName: my-pv
+  accessModes:
+    - ReadWriteOnce 
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi

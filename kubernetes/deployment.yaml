@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fileupload-dep
+  namespace: alex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fileupload
+  template:
+    metadata:
+      labels:
+        app: fileupload
+    spec:
+      containers:
+        - name: fileupload
+          image: azold6/fileupload-pv-pvc
+          livenessProbe:
+            httpGet: 
+              path: /actuator/health/liveness
+              port: 8080
+            periodSeconds: 30
+            initialDelaySeconds: 10
+          volumeMounts:
+            - mountPath: /home/azl6/files-uploaded 
+              name: uploaded-files-storage
+      volumes:
+        - name: uploaded-files-storage
+          persistentVolumeClaim:
+            claimName: my-pvc
