@@ -22,6 +22,13 @@ spec:
               port: 8080
             periodSeconds: 30
             initialDelaySeconds: 10
+          #resources: ###############################
+          #  limits:                                #
+          #    cpu: '1'                             # Descomentar caso haja LimitRange
+          #    memory: 500Mi                        # No namespace definido aqui...
+          #  requests:                              #
+          #    cpu: '2'                             #
+          #    memory: 800Mi ########################
           env:
             - name: UPLOADED_FILES_DIR
               valueFrom:
