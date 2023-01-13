@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limits-alex
+  namespace: alex
+spec:
+  limits:
+  - default: # O máximo de recursos que o Kubernetes irá liberar para Pods
+      cpu: '1'
+      memory: 500Mi 
+    defaultRequest: # O mínimo de recursos que o Kubernetes irá liberar para Pods
+      cpu: '0.5'
+      memory: 250Mi 
+    type: Container

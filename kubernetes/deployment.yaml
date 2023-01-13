@@ -15,15 +15,21 @@ spec:
     spec:
       containers:
         - name: fileupload
-          image: azold6/fileupload-pv-pvc
+          image: azold6/fileupload-pv-pvc:latest
           livenessProbe:
             httpGet: 
               path: /actuator/health/liveness
               port: 8080
             periodSeconds: 30
             initialDelaySeconds: 10
+          env:
+            - name: UPLOADED_FILES_DIR
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: FILES_UPLOAD_CHOSEN_DIR
           volumeMounts:
-            - mountPath: /home/azl6/files-uploaded 
+            - mountPath: /home/my-custom-dir
               name: uploaded-files-storage
       volumes:
         - name: uploaded-files-storage
