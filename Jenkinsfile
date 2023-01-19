@@ -1,5 +1,10 @@
 pipeline {
     agent any 
+
+    environment {
+      UPLOADED_FILES_DIR='/tmp/spring_fileupload_'
+    }
+
     stages {
         stage('Test') { 
             steps {
