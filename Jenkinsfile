@@ -39,9 +39,9 @@ pipeline {
 
         stage('Deploy') { 
             steps {
-                sh '''
-                    echo "Not yet implemented" 
-                ''' 
+                sshagent(credentials : ['key-to-ec2']) {
+                    sh 'docker run --name fileupload --rm azold6/fileupload-pv-pvc:$BUILD_NUMBER'
+                }
             }
         }
     }
