@@ -1,6 +1,8 @@
 package com.azl6.fileupload.controllers;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,5 +29,10 @@ public class FileUploadController {
       UploadResponse uploadResponse = new UploadResponse(fileName);
 
       return ResponseEntity.ok().body(uploadResponse);
+  }
+
+  @GetMapping("/hello")
+  public ResponseEntity<String> helloWorld(@RequestParam String personName){
+    return ResponseEntity.ok().body("Hello, " + personName);
   }
 }
