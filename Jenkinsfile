@@ -22,25 +22,25 @@ pipeline {
 
         stage('Build') { 
             steps {
-                sh '''
+                sh """
                     docker build -t azold6/fileupload-pv-pvc:$BUILD_NUMBER . 
-                ''' 
+                """ 
             }
         }
 
         stage('Push') { 
             steps {
-                sh '''
+                sh """
                     docker login -u="$DOCKER_USR" -p="$DOCKER_PASSWD"
                     docker push azold6/fileupload-pv-pvc:$BUILD_NUMBER
-                ''' 
+                """ 
             }
         }
 
         stage('Deploy') { 
             steps {
                 sshagent(credentials : ['key-to-ec2']) {
-                    sh 'docker run -d --name fileupload --rm azold6/fileupload-pv-pvc:$BUILD_NUMBER'
+                    sh "docker run -d --name fileupload --rm azold6/fileupload-pv-pvc:$BUILD_NUMBER"
                 }
             }
         }
