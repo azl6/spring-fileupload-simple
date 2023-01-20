@@ -41,8 +41,8 @@ pipeline {
             steps {
                 sshagent(credentials : ['key-to-ec2']) {
                     sh """
-                    ssh ec2-user@52.67.76.219 "docker stop fileupload"
-                    ssh ec2-user@52.67.76.219 "docker run -p 8080:8080 -d --name fileupload --rm azold6/fileupload-pv-pvc:$BUILD_NUMBER"
+                        ssh ec2-user@52.67.76.219 "docker stop fileupload"
+                        ssh ec2-user@52.67.76.219 "docker run -p 8080:8080 -d --name fileupload --rm azold6/fileupload-pv-pvc:$BUILD_NUMBER"
                     """                
                 }
             }
