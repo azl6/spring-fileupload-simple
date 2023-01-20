@@ -2,7 +2,7 @@ pipeline {
     agent any 
 
     environment {
-      UPLOADED_FILES_DIR='/tmp/spring_fileupload_'
+      UPLOADED_FILES_DIR='/tmp/spring_fileupload_dir'
       DOCKER_USR=credentials('docker_usr')
       DOCKER_PASSWD=credentials('docker_passwd')
     }
@@ -40,7 +40,7 @@ pipeline {
         stage('Deploy') { 
             steps {
                 sshagent(credentials : ['key-to-ec2']) {
-                    sh 'docker run --name fileupload --rm azold6/fileupload-pv-pvc:$BUILD_NUMBER'
+                    sh 'docker run -d --name fileupload --rm azold6/fileupload-pv-pvc:$BUILD_NUMBER'
                 }
             }
         }
